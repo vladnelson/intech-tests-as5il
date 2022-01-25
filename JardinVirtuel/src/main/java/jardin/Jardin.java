@@ -18,11 +18,15 @@ import jardin.flore.Vegetal;
 
 public class Jardin {
 
-	private int longueur; 
+	private int longueur;
 	private int largeur;
 	private HashMap<String, Integer> panier;
 	private Emplacement emplacement[][];
 	
+	public Emplacement[][] getEmplacement() {
+		return emplacement;
+	}
+
 	public HashMap<String, Integer> getPanier() {
 		return panier;
 	}
@@ -35,11 +39,7 @@ public class Jardin {
 	}
 
 	public void ajouterPanier(String nom, Integer quantite) {
-		if (this.panier.get(nom) == null) {
-			this.panier.put(nom, quantite);
-		} else {
-			this.panier.put(nom, this.panier.get(nom) + quantite);
-		}
+		this.panier.put(nom, this.panier.getOrDefault(nom, 0) + quantite);
 	}
 
 	@Override
@@ -59,12 +59,12 @@ public class Jardin {
 			}
 			sb.append("\n");
 		}
-		
+
 		sb.append("\nEt notre panier contient :");
-		
+
 		TreeSet<String> sortedSet = new TreeSet<String>();
 		sortedSet.addAll(panier.keySet());
-		
+
 		Iterator<String> it = sortedSet.iterator();
 		while (it.hasNext()) {
 			String nom = it.next();
@@ -135,9 +135,12 @@ public class Jardin {
 	}
 
 	public void recolter() {
+		
+		//Emplacement[][] duplicate = emplacement.clone();
+		
 		for (int x = 0; x < this.longueur; x++) {
 			for (int y = 0; y < this.largeur; y++) {
-				
+
 				Emplacement e = emplacement[x][y];
 				if (e != null && e.getVeg().getEtat() == Etat.FLEUR) {
 					emplacement[x][y] = null;
