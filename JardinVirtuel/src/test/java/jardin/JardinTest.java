@@ -8,8 +8,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.ByteArrayInputStream;
 import java.util.AbstractMap.SimpleEntry;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import jardin.flore.Ail;
 import jardin.flore.Betterave;
+import jardin.flore.Carotte;
 import jardin.flore.Etat;
+import jardin.flore.Tomate;
 
 @ExtendWith(MockitoExtension.class)
 public class JardinTest {
@@ -159,6 +161,84 @@ public class JardinTest {
 		verify(b).seDupliquer(5, 5);
 		
 		assertNotNull(j.getEmplacement()[1][1]);
+		assertNull(j.getEmplacement()[0][0]);
+	}
+	
+	@Test
+	public void testSemerAil() {
+		//Arrange
+		String input = "0 0 1";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		
+		j.ajouterPanier("Ail", 2);
+		
+		//Act
+		j.semer();
+		
+		//Assert
+		assertEquals(Ail.class, j.getEmplacement()[0][0].getVeg().getClass());
+		assertEquals(1, j.getPanier().get("Ail"));
+	}
+	
+	@Test
+	public void testSemerBetterave() {
+		//Arrange
+		String input = "0 0 2";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		
+		j.ajouterPanier("Betterave", 2);
+		
+		//Act
+		j.semer();
+		
+		//Assert
+		assertEquals(Betterave.class, j.getEmplacement()[0][0].getVeg().getClass());
+		assertEquals(1, j.getPanier().get("Betterave"));
+	}
+	
+	@Test
+	public void testSemeCarotte() {
+		//Arrange
+		String input = "0 0 3";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		
+		j.ajouterPanier("Carotte", 2);
+		
+		//Act
+		j.semer();
+		
+		//Assert
+		assertEquals(Carotte.class, j.getEmplacement()[0][0].getVeg().getClass());
+		assertEquals(1, j.getPanier().get("Carotte"));
+	}
+	
+	@Test
+	public void testSemerTomate() {
+		//Arrange
+		String input = "0 0 4";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		
+		j.ajouterPanier("Tomate", 2);
+		
+		//Act
+		j.semer();
+		
+		//Assert
+		assertEquals(Tomate.class, j.getEmplacement()[0][0].getVeg().getClass());
+		assertEquals(1, j.getPanier().get("Tomate"));
+	}
+	
+	@Test
+	public void testSemerPanierVide() {
+		// Arrange
+		String input = "0 0 1";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		
+		// Act
+		j.semer();
+		
+		// Assert
+		assertNull(j.getPanier().get("Ail"));
 		assertNull(j.getEmplacement()[0][0]);
 	}
 

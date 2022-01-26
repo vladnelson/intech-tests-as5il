@@ -93,27 +93,27 @@ public class Jardin {
 
 		switch (choiceVegetal) {
 		case 1:
-			if (this.panier.get("Ail") > 0) {
+			if (this.panier.get("Ail") != null && this.panier.get("Ail") > 0) {
 				this.emplacement[x][y] = new Emplacement(new Ail());
 				this.panier.put("Ail", this.panier.get("Ail") - 1);
 			}
 			break;
 		case 2:
-			if (this.panier.get("Betterave") > 0) {
+			if (this.panier.get("Betterave") != null && this.panier.get("Betterave") > 0) {
 				this.emplacement[x][y] = new Emplacement(new Betterave());
 				this.panier.put("Betterave", this.panier.get("Betterave") - 1);
 				break;
 			}
 		case 3:
-			if (this.panier.get("Carotte") > 0) {
+			if (this.panier.get("Carotte") != null && this.panier.get("Carotte") > 0) {
 				this.emplacement[x][y] = new Emplacement(new Carotte());
 				this.panier.put("Carotte", this.panier.get("Carotte") - 1);
 				break;
 			}
 		case 4:
-			if (this.panier.get("Tomate") > 0) {
+			if (this.panier.get("Tomate") != null && this.panier.get("Tomate") > 0) {
 				this.emplacement[x][y] = new Emplacement(new Tomate());
-				this.panier.put("Tomtate", this.panier.get("Tomate") - 1);
+				this.panier.put("Tomate", this.panier.get("Tomate") - 1);
 				break;
 			}
 		}
