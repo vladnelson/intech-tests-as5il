@@ -7,6 +7,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -22,7 +24,7 @@ import com.intech.comptabilite.model.LigneEcritureComptable;
 import com.intech.comptabilite.repositories.EcritureComptableRepository;
 
 @SpringBootTest
-public class EcritureComptableServiceTest {
+public class EcritureComptableServiceUnitTest {
 
 	@Autowired
 	private EcritureComptableService ecritureComptableService;
@@ -38,6 +40,68 @@ public class EcritureComptableServiceTest {
 		LigneEcritureComptable vRetour = new LigneEcritureComptable(new CompteComptable(pCompteComptableNumero),
 				vLibelle, vDebit, vCredit);
 		return vRetour;
+	}
+
+	
+	
+	@Test
+	public void updateEcritureComptable() {
+		// Arrange
+		EcritureComptable ecritureComptable =new EcritureComptable();
+		when(h.save(ecritureComptable)).thenReturn(ecritureComptable);
+
+		// Act
+		EcritureComptable EcritureComptableExec = ecritureComptableService.updateEcritureComptable(ecritureComptable);
+
+		// Assert
+		verify(h).save(ecritureComptable);
+		assertEquals(ecritureComptable, EcritureComptableExec);
+	}
+	
+	
+	@Test
+	public void insertEcritureComptable() {
+		// Arrange
+		EcritureComptable ecritureComptable =new EcritureComptable();
+		when(h.save(ecritureComptable)).thenReturn(ecritureComptable);
+
+		// Act
+		EcritureComptable EcritureComptableExec = ecritureComptableService.insertEcritureComptable(ecritureComptable);
+
+		// Assert
+		verify(h).save(ecritureComptable);
+		assertEquals(ecritureComptable, EcritureComptableExec);
+	}
+
+	@Test
+	public void getListEcritureComptable() {
+		// Arrange
+		List<EcritureComptable> ecritureComptable = new ArrayList<EcritureComptable>();
+		ecritureComptable.add(new EcritureComptable());
+		ecritureComptable.add(new EcritureComptable());
+		when(h.findAll()).thenReturn(ecritureComptable);
+
+		// Act
+		int countList = ecritureComptableService.getListEcritureComptable().size();
+
+		// Assert
+		verify(h).findAll();
+		assertEquals(2, countList);
+	}
+
+	@Test
+	public void getListEcritureComptableEmpty() {
+		// Arrange
+		List<EcritureComptable> ecritureComptable = new ArrayList<EcritureComptable>();
+		when(h.findAll()).thenReturn(ecritureComptable);
+
+		// Act
+		int countList = ecritureComptableService.getListEcritureComptable().size();
+
+		// Assert
+
+		verify(h).findAll();
+		assertEquals(0, countList);
 	}
 
 	@Test
