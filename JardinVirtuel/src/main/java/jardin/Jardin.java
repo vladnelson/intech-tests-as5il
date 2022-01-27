@@ -158,4 +158,12 @@ public class Jardin {
 		}
 	}
 
+	public void arroserUnEmplacement(int x, int y) {
+		Emplacement e = emplacement[x][y];
+		if(e != null && e.getVeg() != null) {
+			Vegetal veg = e.getVeg();
+			veg.grandir(2);		
+		}
+	}
+
 }

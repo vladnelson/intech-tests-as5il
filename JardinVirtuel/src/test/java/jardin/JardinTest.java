@@ -241,5 +241,20 @@ public class JardinTest {
 		assertNull(j.getPanier().get("Ail"));
 		assertNull(j.getEmplacement()[0][0]);
 	}
+	
+	@Test
+	public void testArroserUnEmplacement() {
+		//Arrange
+		Ail ail = new Ail();
+		int x = 0;
+		int y = 0;
+		j.getEmplacement()[x][y] = new Emplacement(ail);
+				
+		//Act
+		j.arroserUnEmplacement(x, y);
+		
+		//Assert
+		assertEquals(Etat.TIGE, ail.getEtat());
+	}
 
 }
